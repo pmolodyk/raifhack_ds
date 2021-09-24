@@ -29,6 +29,7 @@ def parse_args():
 
     parser.add_argument("--train_data", "-d", type=str, dest="d", required=True, help="Путь до обучающего датасета")
     parser.add_argument("--model_path", "-mp", type=str, dest="mp", required=True, help="Куда сохранить обученную ML модель")
+    parser.add_argument("--val_data", "-v", type=str, dest="v", required=True, help="Путь до валидационного датасета")
 
     return parser.parse_args()
 
@@ -39,6 +40,8 @@ if __name__ == "__main__":
         args = vars(parse_args())
         logger.info('Load train df')
         train_df = pd.read_csv(args['d'])
+        logger.info('Load validation df')
+        val_df = pd.read_csv(args['v'])
         logger.info(f'Input shape: {train_df.shape}')
         train_df = prepare_categorical(train_df)
 
@@ -47,6 +50,12 @@ if __name__ == "__main__":
         X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
         logger.info(f'X_offer {X_offer.shape}  y_offer {y_offer.shape}\tX_manual {X_manual.shape} y_manual {y_manual.shape}')
+
+        X_val_offer = val_df[val_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
+        y_val_offer = val_df[val_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
+        X_val_manual = val_df[val_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]
+        y_val_manual = val_df[val_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
+
         model = BenchmarkModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                   ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
         logger.info('Fit model')
@@ -61,6 +70,16 @@ if __name__ == "__main__":
         predictions_manual = model.predict(X_manual)
         metrics = metrics_stat(y_manual.values, predictions_manual)
         logger.info(f'Metrics stat for training data with manual prices: {metrics}')
+
+        #VALIDATION
+        predictions_val_offer = model.predict(X_val_offer)
+        metrics_val = metrics_stat(y_val_offer.values, predictions_val_offer / (
+                    1 + model.corr_coef))  # для обучающей выборки с ценами из объявлений смотрим качество без коэффициента
+        logger.info(f'Metrics stat for validation data with offers prices: {metrics_val}')
+
+        predictions_val_manual = model.predict(X_val_manual)
+        metrics_val = metrics_stat(y_val_manual.values, predictions_val_manual)
+        logger.info(f'Metrics stat for validation data with manual prices: {metrics_val}')
 
 
     except Exception as e:

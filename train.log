@@ -5,3 +5,42 @@
 2021-09-24 20:10:03,646 __main__     INFO     Predict
 2021-09-24 20:10:04,081 __main__     INFO     Save results
 2021-09-24 20:10:04,141 __main__     INFO     END predict.py
+2021-09-24 21:51:28,590 __main__     INFO     START train.py
+2021-09-24 21:51:28,591 __main__     INFO     Load train df
+2021-09-24 21:51:30,717 __main__     INFO     Input shape: (279792, 77)
+2021-09-24 21:51:31,686 __main__     INFO     X_offer (275299, 70)  y_offer (275299,)	X_manual (4493, 70) y_manual (4493,)
+2021-09-24 21:51:31,687 __main__     INFO     Fit model
+2021-09-24 21:51:31,687 raifhack_ds.model INFO     Fit lightgbm
+2021-09-24 21:53:36,756 raifhack_ds.model INFO     Find corr coefficient
+2021-09-24 21:53:37,567 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-24 21:53:37,568 __main__     INFO     Save model
+2021-09-24 21:54:30,644 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5204271589249925, 'mdape': 0.3125603548666643, 'rmse': 73946.13496006273, 'r2': 0.8172816627975483, 'raif_metric': 3.4943808614617957}
+2021-09-24 21:54:31,464 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.30544381035322893, 'mdape': 0.24759116446089766, 'rmse': 73135.9256925428, 'r2': 0.3308659827460806, 'raif_metric': 2.0449581821903826}
+2021-09-24 21:54:31,464 __main__     INFO     END train.py
+2021-09-24 21:57:51,406 __main__     INFO     START train.py
+2021-09-24 21:57:51,407 __main__     INFO     Load train df
+2021-09-24 21:57:53,380 __main__     INFO     Input shape: (279792, 77)
+2021-09-24 21:57:54,190 __main__     INFO     X_offer (275299, 70)  y_offer (275299,)	X_manual (4493, 70) y_manual (4493,)
+2021-09-24 21:57:54,190 __main__     INFO     Fit model
+2021-09-24 21:57:54,190 raifhack_ds.model INFO     Fit lightgbm
+2021-09-24 21:59:58,192 raifhack_ds.model INFO     Find corr coefficient
+2021-09-24 21:59:58,996 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-24 21:59:58,998 __main__     INFO     Save model
+2021-09-24 22:00:55,127 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5204271589249925, 'mdape': 0.3125603548666643, 'rmse': 73946.13496006273, 'r2': 0.8172816627975483, 'raif_metric': 3.4943808614617957}
+2021-09-24 22:00:56,082 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.30544381035322893, 'mdape': 0.24759116446089766, 'rmse': 73135.9256925428, 'r2': 0.3308659827460806, 'raif_metric': 2.0449581821903826}
+2021-09-24 22:00:56,082 __main__     INFO     END train.py
+2021-09-24 22:34:39,577 __main__     INFO     START train.py
+2021-09-24 22:34:39,578 __main__     INFO     Load train df
+2021-09-24 22:34:41,770 __main__     INFO     Load validation df
+2021-09-24 22:34:41,994 __main__     INFO     Input shape: (251812, 77)
+2021-09-24 22:34:42,606 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (4100, 70) y_manual (4100,)
+2021-09-24 22:34:42,660 __main__     INFO     Fit model
+2021-09-24 22:34:42,660 raifhack_ds.model INFO     Fit lightgbm
+2021-09-24 22:36:22,708 raifhack_ds.model INFO     Find corr coefficient
+2021-09-24 22:36:23,427 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-24 22:36:23,427 __main__     INFO     Save model
+2021-09-24 22:37:10,630 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5043859971715596, 'mdape': 0.31014303690421474, 'rmse': 72948.89930537011, 'r2': 0.8241732340876078, 'raif_metric': 3.4705397780729785}
+2021-09-24 22:37:11,391 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.30095564736217434, 'mdape': 0.25092149371349093, 'rmse': 76183.68968242845, 'r2': 0.3026649019988512, 'raif_metric': 2.0706593009820757}
+2021-09-24 22:37:16,524 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6698596129156125, 'mdape': 0.32935958086730255, 'rmse': 85631.92215009569, 'r2': 0.7266249821132493, 'raif_metric': 3.654987172813648}
+2021-09-24 22:37:16,608 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3626395055690544, 'mdape': 0.23478071176958018, 'rmse': 43810.10250281943, 'r2': 0.5787374262925938, 'raif_metric': 1.832304230991863}
+2021-09-24 22:37:16,609 __main__     INFO     END train.py
