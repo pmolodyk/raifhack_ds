@@ -1,0 +1,7 @@
+2021-09-24 20:10:03,312 __main__     INFO     START predict.py
+2021-09-24 20:10:03,315 __main__     INFO     Load test df
+2021-09-24 20:10:03,381 __main__     INFO     Input shape: (2974, 76)
+2021-09-24 20:10:03,389 __main__     INFO     Load model
+2021-09-24 20:10:03,646 __main__     INFO     Predict
+2021-09-24 20:10:04,081 __main__     INFO     Save results
+2021-09-24 20:10:04,141 __main__     INFO     END predict.py
