@@ -4,14 +4,24 @@ import pandas as pd
 from traceback import format_exc
 
 from raifhack_ds.model import BenchmarkModel
-from raifhack_ds.settings import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET
+from raifhack_ds.model import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET
 from raifhack_ds.utils import PriceTypeEnum
 from raifhack_ds.metrics import metrics_stat
-from raifhack_ds.features import prepare_categorical
+from raifhack_ds.features import prepare_categorical, preprocess
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
+def bin_cities(df):
+    df1 = df.copy()
+    df_big_cities = pd.DataFrame(df1.city.value_counts()[:20])
+    df_big_cities['big_city'] = 1.0
+    df_middle_cities = pd.DataFrame(df1.city.value_counts()[20:100])
+    df_middle_cities['middle_city'] = 1.0
+    df2 = df1.merge(df_big_cities.drop('city', axis=1), how='left', left_on='city', right_index=True)
+    df3 = df2.merge(df_middle_cities.drop('city', axis=1), how='left', left_on='city', right_index=True).drop('city', axis=1)
+    return df3
+    # df3[['big_city', 'middle_city']] = df3[['big_city', 'middle_city']].fillna(0)
 
 def parse_args():
 
@@ -44,7 +54,9 @@ if __name__ == "__main__":
         val_df = pd.read_csv(args['v'])
         logger.info(f'Input shape: {train_df.shape}')
         train_df = prepare_categorical(train_df)
-
+        val_df = prepare_categorical(val_df)
+        train_df = preprocess(train_df)
+        val_df = preprocess(val_df)
         X_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
         X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
