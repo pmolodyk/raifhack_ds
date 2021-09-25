@@ -4,7 +4,7 @@ import pandas as pd
 from traceback import format_exc
 
 from raifhack_ds.model import BenchmarkModel
-from raifhack_ds.model import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET, BAD_REGIONS
+from raifhack_ds.model import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET, BAD_REGIONS, GOOD_REGIONS, EXP_NAME
 from raifhack_ds.utils import PriceTypeEnum
 from raifhack_ds.metrics import metrics_stat
 from raifhack_ds.features import prepare_categorical, preprocess
@@ -70,7 +70,7 @@ if __name__ == "__main__":
         NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES]
         y_val_manual = val_df[val_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
         models = {}
-        for s in BAD_REGIONS:
+        for s in BAD_REGIONS + GOOD_REGIONS:
             models[s] = BenchmarkModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                   ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
             logger.info('Fit {} model'.format(s))
@@ -88,12 +88,13 @@ if __name__ == "__main__":
         model.save('model')
 
         #VALIDATION
-        for s in BAD_REGIONS:
+        for s in BAD_REGIONS + GOOD_REGIONS:
             predictions_val_manual_city = models[s].predict(X_val_manual[X_val_manual.region == s][NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES])
             X_val_manual.loc[X_val_manual.region == s, 'prediction'] = predictions_val_manual_city
 
-        predictions_val_manual_other = model.predict(X_val_manual[~X_val_manual.region.isin(BAD_REGIONS)][NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES])
-        X_val_manual.loc[~X_val_manual.region.isin(BAD_REGIONS), 'prediction'] = predictions_val_manual_other
+        predictions_val_manual_other = model.predict(X_val_manual[~X_val_manual.region.isin(BAD_REGIONS + GOOD_REGIONS)][NUM_FEATURES + CATEGORICAL_OHE_FEATURES + CATEGORICAL_STE_FEATURES])
+        X_val_manual.loc[~X_val_manual.region.isin(BAD_REGIONS + GOOD_REGIONS), 'prediction'] = predictions_val_manual_other
+        X_val_manual.to_csv(EXP_NAME + '.csv')
         metrics_val = metrics_stat(y_val_manual.values, X_val_manual['prediction'].values)
         logger.info(f'Metrics stat for validation data with manual prices: {metrics_val}')
 

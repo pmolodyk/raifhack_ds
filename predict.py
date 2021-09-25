@@ -6,7 +6,7 @@ from traceback import format_exc
 
 from raifhack_ds.model import BenchmarkModel
 from raifhack_ds.model import LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES, \
-    CATEGORICAL_STE_FEATURES
+    CATEGORICAL_STE_FEATURES, BAD_REGIONS
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -44,14 +44,16 @@ if __name__ == "__main__":
         # test_df = preprocess(test_df)
 
         logger.info('Load model')
-        model = BenchmarkModel.load(args['mp'])
-        model_moscow = BenchmarkModel.load(args['mp'] + "_moscow")
+        model = BenchmarkModel.load('model')
+        models = {}
+        for s in BAD_REGIONS:
+            models[s] = BenchmarkModel.load('model' + s)
 
         logger.info('Predict')
-        test_df.loc[test_df.region == 'Москва', 'per_square_meter_price'] = model_moscow.predict(test_df[test_df.region == 'Москва'][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
-        print(test_df[test_df.region == 'Москва'].shape)
-        test_df.loc[test_df.region != 'Москва', 'per_square_meter_price'] = model.predict(test_df[test_df.region != 'Москва'][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
-        print(test_df.columns)
+        for s in BAD_REGIONS:
+            test_df.loc[test_df.region == s, 'per_square_meter_price'] = models[s].predict(test_df[test_df.region == s][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+
+        test_df.loc[~test_df.region.isin(BAD_REGIONS), 'per_square_meter_price'] = model.predict(test_df[~test_df.region.isin(BAD_REGIONS)][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
 
 
         logger.info('Save results')

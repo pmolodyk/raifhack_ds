@@ -23,7 +23,9 @@ CATEGORICAL_STE_FEATURES = ['region', 'realty_type']
 # признаки, для которых применяем one hot encoding
 CATEGORICAL_OHE_FEATURES = []
 
+EXP_NAME = 'sota'
 BAD_REGIONS = ['Москва', 'Краснодарский край']
+GOOD_REGIONS = []
 
 
 def cnt_ohe_ft(df):
@@ -153,7 +155,7 @@ class BenchmarkModel():
         print(predictions)
         best_metrics = 10
         ans = -1
-        for deviation in np.linspace(-0.2, 0.2, num=20):
+        for deviation in np.linspace(-0.2, 0.2, num=40):
             print('trying deviation:', deviation)
             y_preds = pd.Series(np.array(predictions) * (1 + deviation))
             new_metrics = metrics_stat(y_manual.values, y_preds)['raif_metric']

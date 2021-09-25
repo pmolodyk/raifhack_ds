@@ -17,12 +17,13 @@ def preprocess(dataframe):
             return float(a)
         else:
             return 0
-
-    ros = RandomOverSampler(random_state=42)
+    offers = len(df1[df1.price_type == 0])
+    ros = RandomOverSampler(random_state=42, sampling_strategy={0: offers, 1: offers})
     df_X_resampled, df_y_resampled = ros.fit_resample(df1.drop(columns='price_type'), df1['price_type'])
     df1 = df_X_resampled
     df1['price_type'] = df_y_resampled
     print(df1.head(10))
+    df1 = df1[(df1.per_square_meter_price < 1200000) | (df1.price_type == 1)]
 
     df1['real_floor'] = df1.floor.apply(dirty_floor_to_num)
     df1['floor_isna'] = df1.floor.isna().astype(int)
