@@ -45,8 +45,15 @@ if __name__ == "__main__":
 
         logger.info('Load model')
         model = BenchmarkModel.load(args['mp'])
+        model_moscow = BenchmarkModel.load(args['mp'] + "_moscow")
+
         logger.info('Predict')
-        test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+        test_df.loc[test_df.region == 'Москва', 'per_square_meter_price'] = model_moscow.predict(test_df[test_df.region == 'Москва'][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+        print(test_df[test_df.region == 'Москва'].shape)
+        test_df.loc[test_df.region != 'Москва', 'per_square_meter_price'] = model.predict(test_df[test_df.region != 'Москва'][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+        print(test_df.columns)
+
+
         logger.info('Save results')
         test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
     except Exception as e:

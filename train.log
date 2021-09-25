@@ -318,3 +318,537 @@ ValueError: The target 'y' needs to have more than 1 class. Got 1 class instead
 2021-09-25 13:17:55,605 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.7379665371484427, 'mdape': 0.34113263859473425, 'rmse': 87230.56446138523, 'r2': 0.7163225562371849, 'raif_metric': 3.7639409513780486}
 2021-09-25 13:17:59,545 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3331177769224468, 'mdape': 0.2048525999263556, 'rmse': 32846.06623736565, 'r2': 0.7766417312995466, 'raif_metric': 1.3051770114419303}
 2021-09-25 13:17:59,545 __main__     INFO     END train.py
+2021-09-25 17:09:56,582 __main__     INFO     START train.py
+2021-09-25 17:09:56,583 __main__     INFO     Load train df
+2021-09-25 17:09:58,740 __main__     INFO     Load validation df
+2021-09-25 17:09:58,995 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:10:10,722 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:10:10,769 __main__     INFO     Fit model
+2021-09-25 17:10:10,770 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:12:32,113 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:16:15,943 __main__     INFO     START train.py
+2021-09-25 17:16:15,945 __main__     INFO     Load train df
+2021-09-25 17:16:18,686 __main__     INFO     Load validation df
+2021-09-25 17:16:18,991 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:16:30,692 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:16:30,736 __main__     INFO     Fit model
+2021-09-25 17:16:30,736 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:18:43,992 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:21:25,529 raifhack_ds.model INFO     Corr coef: -0.13
+2021-09-25 17:21:25,529 __main__     INFO     Save model
+2021-09-25 17:22:17,659 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5725275135439643, 'mdape': 0.32248840654108873, 'rmse': 76440.93663795246, 'r2': 0.8069367997412927, 'raif_metric': 3.5827033522687053}
+2021-09-25 17:23:11,100 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2142430087704964, 'mdape': 0.18904482615966228, 'rmse': 23989.35456037157, 'r2': 0.9309837740155826, 'raif_metric': 0.9458852578993524}
+2021-09-25 17:23:16,348 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.7379665371484427, 'mdape': 0.34113263859473425, 'rmse': 87230.56446138523, 'r2': 0.7163225562371849, 'raif_metric': 3.7639409513780486}
+2021-09-25 17:23:21,879 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33354651295133636, 'mdape': 0.20536328860454453, 'rmse': 32791.59805344854, 'r2': 0.7773819010283721, 'raif_metric': 1.3066747987416159}
+2021-09-25 17:23:21,879 __main__     INFO     END train.py
+2021-09-25 17:31:52,776 __main__     INFO     START train.py
+2021-09-25 17:31:52,776 __main__     INFO     Load train df
+2021-09-25 17:31:54,947 __main__     INFO     Load validation df
+2021-09-25 17:31:55,240 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:32:05,307 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:32:05,331 __main__     INFO     Fit model
+2021-09-25 17:32:05,436 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 75, in <module>
+    model_moscow.fit(X_manual[X_manual.region == 'Москва'], y_manual[X_manual.region == 'Москва'], X_all[X_all.region == 'Москва'], y_all[y_all.region == 'Москва'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/generic.py", line 5141, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'Series' object has no attribute 'region'
+
+2021-09-25 17:32:38,614 __main__     INFO     START train.py
+2021-09-25 17:32:38,615 __main__     INFO     Load train df
+2021-09-25 17:32:40,960 __main__     INFO     Load validation df
+2021-09-25 17:32:41,271 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:32:52,337 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:32:52,364 __main__     INFO     Fit model
+2021-09-25 17:32:52,480 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:33:20,004 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:33:22,744 raifhack_ds.model INFO     Corr coef: -0.13
+2021-09-25 17:33:22,749 __main__     INFO     Save model
+2021-09-25 17:33:23,196 __main__     INFO     Fit model
+2021-09-25 17:33:23,535 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 84, in <module>
+    X_all[X_all.region != 'Москва'], y_all[y_all.region != 'Москва'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/generic.py", line 5141, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'Series' object has no attribute 'region'
+
+2021-09-25 17:33:45,417 __main__     INFO     START train.py
+2021-09-25 17:33:45,419 __main__     INFO     Load train df
+2021-09-25 17:33:47,472 __main__     INFO     Load validation df
+2021-09-25 17:33:47,734 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:33:56,758 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:33:56,784 __main__     INFO     Fit model
+2021-09-25 17:33:56,900 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:34:20,718 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:34:23,400 raifhack_ds.model INFO     Corr coef: -0.13
+2021-09-25 17:34:23,405 __main__     INFO     Save model
+2021-09-25 17:34:23,808 __main__     INFO     Fit model
+2021-09-25 17:34:24,119 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:36:25,485 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:38:48,444 raifhack_ds.model INFO     Corr coef: -0.11
+2021-09-25 17:38:48,470 __main__     INFO     Save model
+2021-09-25 17:39:30,797 __main__     ERROR    Traceback (most recent call last):
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2898, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'prediction'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "train.py", line 95, in <module>
+    metrics_val = metrics_stat(y_val_manual.values, X_val_manual['prediction'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2900, in get_loc
+    raise KeyError(key) from err
+KeyError: 'prediction'
+
+2021-09-25 17:40:42,224 __main__     INFO     START train.py
+2021-09-25 17:40:42,225 __main__     INFO     Load train df
+2021-09-25 17:40:44,362 __main__     INFO     Load validation df
+2021-09-25 17:40:44,625 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:40:53,766 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:40:53,791 __main__     INFO     Fit model
+2021-09-25 17:40:53,909 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:41:34,043 __main__     INFO     START train.py
+2021-09-25 17:41:34,044 __main__     INFO     Load train df
+2021-09-25 17:41:36,142 __main__     INFO     Load validation df
+2021-09-25 17:41:36,397 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:41:45,363 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:41:45,388 __main__     INFO     Fit model
+2021-09-25 17:41:45,503 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:41:46,329 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:41:46,394 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:41:46,400 __main__     INFO     Save model
+2021-09-25 17:41:46,402 __main__     INFO     Fit model
+2021-09-25 17:41:46,717 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:41:51,908 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:41:54,678 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:41:54,721 __main__     INFO     Save model
+2021-09-25 17:41:55,474 __main__     ERROR    Traceback (most recent call last):
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2898, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1032, in pandas._libs.hashtable.Int64HashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1039, in pandas._libs.hashtable.Int64HashTable.get_item
+KeyError: 0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "train.py", line 95, in <module>
+    metrics_val = metrics_stat(y_val_manual.values, X_val_manual['prediction'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 40, in metrics_stat
+    raif_metric = deviation_metric(y_true, y_pred)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 30, in deviation_metric
+    return np.array([deviation_metric_one_sample(y_true[n], y_pred[n]) for n in range(len(y_true))]).mean()
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 30, in <listcomp>
+    return np.array([deviation_metric_one_sample(y_true[n], y_pred[n]) for n in range(len(y_true))]).mean()
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/series.py", line 882, in __getitem__
+    return self._get_value(key)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/series.py", line 990, in _get_value
+    loc = self.index.get_loc(label)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2900, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+
+2021-09-25 17:42:50,700 __main__     INFO     START train.py
+2021-09-25 17:42:50,701 __main__     INFO     Load train df
+2021-09-25 17:42:53,016 __main__     INFO     Load validation df
+2021-09-25 17:42:53,299 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:43:02,858 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:43:02,885 __main__     INFO     Fit model
+2021-09-25 17:43:03,007 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:43:03,807 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:43:03,873 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:43:03,879 __main__     INFO     Save model
+2021-09-25 17:43:03,880 __main__     INFO     Fit model
+2021-09-25 17:43:04,188 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:43:09,417 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:43:12,063 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:43:12,093 __main__     INFO     Save model
+2021-09-25 17:43:12,841 __main__     ERROR    Traceback (most recent call last):
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2898, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1032, in pandas._libs.hashtable.Int64HashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1039, in pandas._libs.hashtable.Int64HashTable.get_item
+KeyError: 0
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "train.py", line 96, in <module>
+    metrics_val = metrics_stat(y_val_manual.values, X_val_manual['prediction'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 40, in metrics_stat
+    raif_metric = deviation_metric(y_true, y_pred)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 30, in deviation_metric
+    return np.array([deviation_metric_one_sample(y_true[n], y_pred[n]) for n in range(len(y_true))]).mean()
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/metrics.py", line 30, in <listcomp>
+    return np.array([deviation_metric_one_sample(y_true[n], y_pred[n]) for n in range(len(y_true))]).mean()
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/series.py", line 882, in __getitem__
+    return self._get_value(key)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/series.py", line 990, in _get_value
+    loc = self.index.get_loc(label)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 2900, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+
+2021-09-25 17:44:36,905 __main__     INFO     START train.py
+2021-09-25 17:44:36,906 __main__     INFO     Load train df
+2021-09-25 17:44:39,179 __main__     INFO     Load validation df
+2021-09-25 17:44:39,455 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:44:48,629 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:44:48,654 __main__     INFO     Fit model
+2021-09-25 17:44:48,771 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:44:49,589 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:44:49,656 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:44:49,662 __main__     INFO     Save model
+2021-09-25 17:44:49,664 __main__     INFO     Fit model
+2021-09-25 17:44:49,982 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:44:55,130 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:44:57,761 raifhack_ds.model INFO     Corr coef: -0.20
+2021-09-25 17:44:57,796 __main__     INFO     Save model
+2021-09-25 17:44:58,533 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.5217967541981461, 'mdape': 0.3147482323148918, 'rmse': 68090.83003981256, 'r2': -0.01761053591381856, 'raif_metric': 3.321727926722312}
+2021-09-25 17:44:58,534 __main__     INFO     END train.py
+2021-09-25 17:45:31,312 __main__     INFO     START train.py
+2021-09-25 17:45:31,313 __main__     INFO     Load train df
+2021-09-25 17:45:33,469 __main__     INFO     Load validation df
+2021-09-25 17:45:33,736 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:45:42,800 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 17:45:42,827 __main__     INFO     Fit model
+2021-09-25 17:45:42,943 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:46:06,348 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:46:08,274 raifhack_ds.model INFO     Corr coef: -0.14
+2021-09-25 17:46:08,279 __main__     INFO     Save model
+2021-09-25 17:46:08,694 __main__     INFO     Fit model
+2021-09-25 17:46:09,007 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:48:07,212 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:49:32,284 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 17:49:32,310 __main__     INFO     Save model
+2021-09-25 17:50:15,208 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33540225732976464, 'mdape': 0.1908700200390747, 'rmse': 35198.47904367064, 'r2': 0.7280731239555622, 'raif_metric': 1.144858071693589}
+2021-09-25 17:50:15,209 __main__     INFO     END train.py
+2021-09-25 17:54:00,412 __main__     INFO     START train.py
+2021-09-25 17:54:00,413 __main__     INFO     Load train df
+2021-09-25 17:54:03,386 __main__     INFO     Load validation df
+2021-09-25 17:54:03,803 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:54:11,883 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (123856, 70) y_manual (123856,)
+2021-09-25 17:54:11,907 __main__     INFO     Fit model
+2021-09-25 17:54:11,987 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:54:42,628 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:54:43,683 raifhack_ds.model INFO     Corr coef: -0.14
+2021-09-25 17:54:43,689 __main__     INFO     Save model
+2021-09-25 17:54:44,108 __main__     INFO     Fit model
+2021-09-25 17:54:44,310 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 17:56:16,915 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 17:57:02,623 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 17:57:02,649 __main__     INFO     Save model
+2021-09-25 17:57:53,813 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33856256326048, 'mdape': 0.18901359014384211, 'rmse': 37334.204297279386, 'r2': 0.6940727678609752, 'raif_metric': 1.1816327495854613}
+2021-09-25 17:57:53,813 __main__     INFO     END train.py
+2021-09-25 17:59:42,478 __main__     INFO     START train.py
+2021-09-25 17:59:42,479 __main__     INFO     Load train df
+2021-09-25 17:59:45,617 __main__     INFO     Load validation df
+2021-09-25 17:59:46,033 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 17:59:56,298 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 17:59:56,321 __main__     INFO     Fit model
+2021-09-25 17:59:56,478 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:00:26,313 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:00:28,491 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:00:28,497 __main__     INFO     Save model
+2021-09-25 18:00:28,959 __main__     INFO     Fit model
+2021-09-25 18:00:29,319 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:02:41,806 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:04:09,295 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:04:09,331 __main__     INFO     Save model
+2021-09-25 18:04:57,680 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33432055643060093, 'mdape': 0.18151619312697828, 'rmse': 36223.09100561879, 'r2': 0.7120113631907901, 'raif_metric': 1.2111847541674587}
+2021-09-25 18:04:57,680 __main__     INFO     END train.py
+2021-09-25 18:06:22,101 __main__     INFO     START predict.py
+2021-09-25 18:06:22,102 __main__     INFO     Load test df
+2021-09-25 18:06:22,134 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:06:22,136 __main__     INFO     Load model
+2021-09-25 18:06:22,209 __main__     INFO     Predict
+2021-09-25 18:06:22,233 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 52, in <module>
+    test_df.loc[test_df.region == 'Москва', 'per_square_meter_price'] = model_moscow.predict(test_df.region == 'Москва')
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/model.py", line 188, in predict
+    predictions = self.pipeline.predict(X)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 556, in transform
+    self._check_n_features(X, reset=False)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/base.py", line 352, in _check_n_features
+    n_features = X.shape[1]
+IndexError: tuple index out of range
+
+2021-09-25 18:07:07,404 __main__     INFO     START predict.py
+2021-09-25 18:07:07,404 __main__     INFO     Load test df
+2021-09-25 18:07:07,433 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:07:07,436 __main__     INFO     Load model
+2021-09-25 18:07:07,503 __main__     INFO     Predict
+2021-09-25 18:07:07,540 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 53, in <module>
+    test_df.loc[test_df.region != 'Москва', 'per_square_meter_price'] = model.predict(test_df[test_df.region != 'Москва'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/model.py", line 188, in predict
+    predictions = self.pipeline.predict(X)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 556, in transform
+    self._check_n_features(X, reset=False)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/base.py", line 365, in _check_n_features
+    raise ValueError(
+ValueError: X has 70 features, but ColumnTransformer is expecting 69 features as input.
+
+2021-09-25 18:13:26,505 __main__     INFO     START predict.py
+2021-09-25 18:13:26,506 __main__     INFO     Load test df
+2021-09-25 18:13:26,533 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:13:26,536 __main__     INFO     Load model
+2021-09-25 18:13:26,601 __main__     INFO     Predict
+2021-09-25 18:13:26,636 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 54, in <module>
+    test_df.loc[test_df.region != 'Москва', 'per_square_meter_price'] = model_moscow.predict(test_df[test_df.region != 'Москва'])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/model.py", line 188, in predict
+    predictions = self.pipeline.predict(X)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 556, in transform
+    self._check_n_features(X, reset=False)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/base.py", line 365, in _check_n_features
+    raise ValueError(
+ValueError: X has 70 features, but ColumnTransformer is expecting 69 features as input.
+
+2021-09-25 18:14:55,241 __main__     INFO     START predict.py
+2021-09-25 18:14:55,241 __main__     INFO     Load test df
+2021-09-25 18:14:55,270 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:14:55,273 __main__     INFO     Load model
+2021-09-25 18:14:55,345 __main__     INFO     Predict
+2021-09-25 18:14:55,378 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 54, in <module>
+    test_df.loc[test_df.region != 'Москва', 'per_square_meter_price'] = model.predict(test_df[test_df.region != 'Москва'].drop(columns=['region']))
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/model.py", line 188, in predict
+    predictions = self.pipeline.predict(X)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 560, in transform
+    raise RuntimeError(
+RuntimeError: Given feature/column names do not match the ones for the data given during fit.
+
+2021-09-25 18:15:15,312 __main__     INFO     START predict.py
+2021-09-25 18:15:15,314 __main__     INFO     Load test df
+2021-09-25 18:15:15,347 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:15:15,350 __main__     INFO     Load model
+2021-09-25 18:15:15,419 __main__     INFO     Predict
+2021-09-25 18:15:15,541 __main__     INFO     Save results
+2021-09-25 18:15:15,556 __main__     ERROR    Traceback (most recent call last):
+  File "predict.py", line 59, in <module>
+    test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/frame.py", line 2912, in __getitem__
+    indexer = self.loc._get_listlike_indexer(key, axis=1, raise_missing=True)[1]
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexing.py", line 1254, in _get_listlike_indexer
+    self._validate_read_indexer(keyarr, indexer, axis, raise_missing=raise_missing)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexing.py", line 1304, in _validate_read_indexer
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['id'] not in index"
+
+2021-09-25 18:15:44,490 __main__     INFO     START predict.py
+2021-09-25 18:15:44,491 __main__     INFO     Load test df
+2021-09-25 18:15:44,518 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 18:15:44,521 __main__     INFO     Load model
+2021-09-25 18:15:44,587 __main__     INFO     Predict
+2021-09-25 18:15:44,723 __main__     INFO     Save results
+2021-09-25 18:15:44,744 __main__     INFO     END predict.py
+2021-09-25 18:34:24,971 __main__     INFO     START train.py
+2021-09-25 18:34:24,971 __main__     INFO     Load train df
+2021-09-25 18:34:27,098 __main__     INFO     Load validation df
+2021-09-25 18:34:27,410 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:34:37,728 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:34:37,753 __main__     INFO     Fit Москва model
+2021-09-25 18:34:37,861 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:35:02,069 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:35:03,894 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:35:03,899 __main__     INFO     Save model
+2021-09-25 18:35:04,322 __main__     INFO     Fit Краснодарский край model
+2021-09-25 18:35:04,409 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:35:18,971 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:35:20,830 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:35:20,835 __main__     INFO     Save model
+2021-09-25 18:35:21,387 __main__     INFO     Fit model
+2021-09-25 18:35:21,582 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 86, in <module>
+    X_all[~X_manual.region.isin(BAD_REGIONS)], y_all[~X_manual.region.isin(BAD_REGIONS)])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/frame.py", line 2897, in __getitem__
+    return self._getitem_bool_array(key)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/frame.py", line 2949, in _getitem_bool_array
+    key = check_bool_indexer(self.index, key)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/pandas/core/indexing.py", line 2182, in check_bool_indexer
+    raise IndexingError(
+pandas.core.indexing.IndexingError: Unalignable boolean Series provided as indexer (index of the boolean Series and of the indexed object do not match).
+
+2021-09-25 18:37:09,459 __main__     INFO     START train.py
+2021-09-25 18:37:09,460 __main__     INFO     Load train df
+2021-09-25 18:37:11,558 __main__     INFO     Load validation df
+2021-09-25 18:37:11,832 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:37:20,925 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:37:20,950 __main__     INFO     Fit Москва model
+2021-09-25 18:37:21,066 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:37:43,347 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:37:45,138 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:37:45,143 __main__     INFO     Save model
+2021-09-25 18:37:45,553 __main__     INFO     Fit Краснодарский край model
+2021-09-25 18:37:45,647 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:37:58,737 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:37:59,734 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:37:59,737 __main__     INFO     Save model
+2021-09-25 18:38:00,191 __main__     INFO     Fit model
+2021-09-25 18:38:00,493 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:39:55,546 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:41:20,861 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:41:20,886 __main__     INFO     Save model
+2021-09-25 18:41:20,887 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 88, in <module>
+    model.save(args['mp'])
+KeyError: 'mp'
+
+2021-09-25 18:42:34,094 __main__     INFO     START train.py
+2021-09-25 18:42:34,095 __main__     INFO     Load train df
+2021-09-25 18:42:36,104 __main__     INFO     Load validation df
+2021-09-25 18:42:36,339 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:42:45,355 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:42:45,382 __main__     INFO     Fit Москва model
+2021-09-25 18:42:45,500 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:43:07,935 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:43:09,812 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:43:09,817 __main__     INFO     Save model
+2021-09-25 18:43:10,232 __main__     INFO     Fit Краснодарский край model
+2021-09-25 18:43:10,332 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:43:23,508 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:43:24,307 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:43:24,310 __main__     INFO     Save model
+2021-09-25 18:43:24,718 __main__     INFO     Fit model
+2021-09-25 18:43:25,009 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:45:24,258 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:46:48,721 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:46:48,746 __main__     INFO     Save model
+2021-09-25 18:46:49,189 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 92, in <module>
+    predictions_val_manual_city = models[s].predict(X_val_manual[X_val_manual.region == s])
+KeyError: 'Москва'
+
+2021-09-25 18:48:04,810 __main__     INFO     START train.py
+2021-09-25 18:48:04,811 __main__     INFO     Load train df
+2021-09-25 18:48:06,795 __main__     INFO     Load validation df
+2021-09-25 18:48:07,030 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:48:15,261 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:48:15,290 __main__     INFO     Fit Москва model
+2021-09-25 18:48:15,293 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 77, in <module>
+    models[s].fit(X_manual[X_manual.region == s], y_manual[X_manual.region == s], X_all[X_all.region == s], y_all[X_all.region == s])
+KeyError: 'Москва'
+
+2021-09-25 18:48:33,024 __main__     INFO     START train.py
+2021-09-25 18:48:33,025 __main__     INFO     Load train df
+2021-09-25 18:48:35,254 __main__     INFO     Load validation df
+2021-09-25 18:48:35,534 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:48:44,723 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:48:44,749 __main__     INFO     Fit Москва model
+2021-09-25 18:48:44,867 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:49:08,011 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:49:09,783 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:49:09,788 __main__     INFO     Save model
+2021-09-25 18:49:10,193 __main__     INFO     Fit Краснодарский край model
+2021-09-25 18:49:10,283 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:49:23,364 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:49:24,094 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:49:24,098 __main__     INFO     Save model
+2021-09-25 18:49:24,508 __main__     INFO     Fit Московская область model
+2021-09-25 18:49:24,586 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:49:37,214 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:49:37,668 raifhack_ds.model INFO     Corr coef: -0.05
+2021-09-25 18:49:37,672 __main__     INFO     Save model
+2021-09-25 18:49:38,080 __main__     INFO     Fit Свердловская область model
+2021-09-25 18:49:38,175 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:49:52,426 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:49:56,510 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:49:56,513 __main__     INFO     Save model
+2021-09-25 18:49:56,906 __main__     INFO     Fit model
+2021-09-25 18:49:57,159 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:51:45,329 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:53:05,379 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:53:05,402 __main__     INFO     Save model
+2021-09-25 18:53:05,877 __main__     ERROR    Traceback (most recent call last):
+  File "train.py", line 92, in <module>
+    predictions_val_manual_city = models[s].predict(X_val_manual[X_val_manual.region == s])
+  File "/Users/vapavlov/raif_hack/raifhack_ds/raifhack_ds/model.py", line 191, in predict
+    predictions = self.pipeline.predict(X)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/compose/_column_transformer.py", line 556, in transform
+    self._check_n_features(X, reset=False)
+  File "/Users/vapavlov/raif_hack/raifhack_ds/venv/lib/python3.8/site-packages/sklearn/base.py", line 365, in _check_n_features
+    raise ValueError(
+ValueError: X has 70 features, but ColumnTransformer is expecting 69 features as input.
+
+2021-09-25 18:54:12,091 __main__     INFO     START train.py
+2021-09-25 18:54:12,092 __main__     INFO     Load train df
+2021-09-25 18:54:14,270 __main__     INFO     Load validation df
+2021-09-25 18:54:14,546 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:54:23,651 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:54:23,677 __main__     INFO     Fit Москва model
+2021-09-25 18:54:23,797 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:54:46,590 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:54:48,567 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:54:48,573 __main__     INFO     Save model
+2021-09-25 18:54:48,981 __main__     INFO     Fit Краснодарский край model
+2021-09-25 18:54:49,079 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:55:02,055 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:55:02,816 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:55:02,819 __main__     INFO     Save model
+2021-09-25 18:55:03,220 __main__     INFO     Fit Московская область model
+2021-09-25 18:55:03,302 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:55:15,180 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:55:15,656 raifhack_ds.model INFO     Corr coef: -0.05
+2021-09-25 18:55:15,659 __main__     INFO     Save model
+2021-09-25 18:55:16,084 __main__     INFO     Fit Свердловская область model
+2021-09-25 18:55:16,189 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:55:29,377 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:55:33,596 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 18:55:33,599 __main__     INFO     Save model
+2021-09-25 18:55:34,000 __main__     INFO     Fit model
+2021-09-25 18:55:34,277 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 18:57:18,375 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 18:58:41,003 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 18:58:41,027 __main__     INFO     Save model
+2021-09-25 18:58:41,605 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33102233056662395, 'mdape': 0.19028222155609162, 'rmse': 36297.27411189685, 'r2': 0.7108305822493236, 'raif_metric': 1.175459767104724}
+2021-09-25 18:58:41,605 __main__     INFO     END train.py
+2021-09-25 18:59:45,938 __main__     INFO     START train.py
+2021-09-25 18:59:45,939 __main__     INFO     Load train df
+2021-09-25 18:59:48,097 __main__     INFO     Load validation df
+2021-09-25 18:59:48,366 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 18:59:55,634 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (247712, 69) y_manual (247712,)
+2021-09-25 18:59:55,655 __main__     INFO     Fit Москва model
+2021-09-25 18:59:55,769 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 19:00:18,244 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 19:00:20,028 raifhack_ds.model INFO     Corr coef: -0.12
+2021-09-25 19:00:20,033 __main__     INFO     Save model
+2021-09-25 19:00:20,435 __main__     INFO     Fit Краснодарский край model
+2021-09-25 19:00:20,529 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 19:00:33,716 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 19:00:34,516 raifhack_ds.model INFO     Corr coef: -0.07
+2021-09-25 19:00:34,518 __main__     INFO     Save model
+2021-09-25 19:00:34,935 __main__     INFO     Fit model
+2021-09-25 19:00:35,226 raifhack_ds.model INFO     Fit lightgbm
