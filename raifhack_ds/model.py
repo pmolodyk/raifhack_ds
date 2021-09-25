@@ -26,7 +26,7 @@ CATEGORICAL_OHE_FEATURES = []
 def cnt_ohe_ft(df):
     res = 0
     for ft in CATEGORICAL_OHE_FEATURES:
-        res += 2**len(df[ft].value_counts())
+        res += len(df[ft].value_counts())
     return res
 
 # численные признаки
@@ -150,13 +150,14 @@ class BenchmarkModel():
         print(predictions)
         best_metrics = 10
         ans = -1
-        for deviation in np.linspace(-0.9, 0.9, num=200):
+        for deviation in np.linspace(-0.5, 0.5, num=100):
             print('trying deviation:', deviation)
             y_preds = pd.Series(np.array(predictions) * (1 + deviation))
             new_metrics = metrics_stat(y_manual.values, y_preds)['raif_metric']
             if new_metrics < best_metrics:
                 best_metrics = new_metrics
                 ans = deviation
+        print('Best corr_coef:', ans)
         self.corr_coef = ans
 
     def fit(self, X_offer: pd.DataFrame, y_offer: pd.Series,
