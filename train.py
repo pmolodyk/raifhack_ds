@@ -56,7 +56,7 @@ if __name__ == "__main__":
         train_df = prepare_categorical(train_df)
         val_df = prepare_categorical(val_df)
         train_df = preprocess(train_df)
-        val_df = preprocess(val_df)
+        val_df = preprocess(val_df, True)
         X_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
         X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]

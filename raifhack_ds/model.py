@@ -16,15 +16,22 @@ from raifhack_ds.data_transformers import SmoothedTargetEncoding
 
 logger = logging.getLogger(__name__)
 
+def cnt_ohe_ft(df):
+    res = 0
+    for ft in CATEGORICAL_OHE_FEATURES:
+        res += len(df[ft].value_counts())
+    return res
+
 TARGET = 'per_square_meter_price'
 # признаки (или набор признаков), для которых применяем smoothed target encoding
 CATEGORICAL_STE_FEATURES = ['region', 'realty_type']
 
 # признаки, для которых применяем one hot encoding
-CATEGORICAL_OHE_FEATURES = []
+CATEGORICAL_OHE_FEATURES = ['top_city', 'big_city', 'middle_city']
 
 # численные признаки
-NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
+NUM_FEATURES = [#'floor_unknown', 'floor_second', 'floor_underground', 'floor_3-5', 'floor_high', 
+        'lat', 'lng', 'osm_amenity_points_in_0.001',
        'osm_amenity_points_in_0.005', 'osm_amenity_points_in_0.0075',
        'osm_amenity_points_in_0.01', 'osm_building_points_in_0.001',
        'osm_building_points_in_0.005', 'osm_building_points_in_0.0075',
@@ -163,7 +170,10 @@ class BenchmarkModel():
         """
         logger.info('Fit lightgbm')
         print(X_offer.columns)
-        self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES), len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
+        # self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES), len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
+        ohe_features = cnt_ohe_ft(X_offer)
+        print(ohe_features)
+        self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features, len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
         logger.info('Find corr coefficient')
         self._find_corr_coefficient(X_manual, y_manual)
         logger.info(f'Corr coef: {self.corr_coef:.2f}')

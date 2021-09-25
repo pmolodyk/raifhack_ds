@@ -1,29 +1,73 @@
 import pandas as pd
+import numpy as np
 from raifhack_ds.utils import UNKNOWN_VALUE
 
-def preprocess(dataframe):
-    df1 = dataframe.copy()
+big_cities_set = set()
+middle_cities_set = set()
+df4_ = pd.DataFrame()
 
-    import math
-    def dirty_floor_to_num(a):
-        if not isinstance(a, str) and math.isnan(a):
-            return 0
-        if isinstance(a, int) or isinstance(a, float):
-            return a
-        if a == 'цоколь' or a == '1, цоколь' or a == 'подвал':
-            return -1
-        if a.isnumeric():
-            return float(a)
-        else:
-            return 0
+# def preprocess(df, val=False):
+#     global df4_
+#     alpha=2
+#     beta=1
+#     gamma=1
+#     df1 = df.copy()
+#     if not val:
+#         df2 = df1[['lat', 'lng', 'region']].groupby('region').mean().reset_index()
+#         df3 = df1[['osm_city_nearest_population', 'region']].groupby('region').max().reset_index()
+#         df4 = df2.merge(df3, on='region')
+#         df4.columns = ['region', 'lat_center', 'lng_center', 'pop']
+#         df4_ = df4
 
-    df1['real_floor'] = df1.floor.apply(dirty_floor_to_num)
-    df1['floor_isna'] = df1.floor.isna().astype(int)
-    df1['high_floor'] = (df1.real_floor > 3).astype(int)
-    df1['underground_floor'] = (df1.real_floor <= 0).astype(int)
-    df1['very_high_floor'] = (df1.real_floor > 10).astype(int)
-    df1.drop(['id', 'floor'], axis=1, inplace=True)
-    return df1
+#         def func(a):
+#             x = a.lat
+#             y = a.lng
+#             return np.sum(np.exp(-alpha * ((df4.lat_center - x) ** 2 + (df4.lng_center - y) ** 2) ** (gamma / 2)) * df4['pop'] ** beta)
+
+#         df1['ne_v_jope'] = df1.apply(func, axis=1)
+#         return df1
+#     else:
+#         df4 = df4_
+#         def func(a):
+#             x = a.lat
+#             y = a.lng
+#             return np.sum(np.exp(-alpha * ((df4.lat_center - x) ** 2 + (df4.lng_center - y) ** 2) ** (gamma / 2)) * df4['pop'] ** beta)
+
+#         df1['ne_v_jope'] = df1.apply(func, axis=1)
+#         return df1
+
+def preprocess(dataframe, val=False):
+    global big_cities_set
+    global middle_cities_set
+    df0 = dataframe.copy()
+    if not val:
+        df1 = df0[df0.price_type == 1]
+        df_big_cities = pd.DataFrame(df1.city.value_counts()[:10])
+        df_big_cities['big_city'] = True
+        df_middle_cities = pd.DataFrame(df1.city.value_counts()[10:50])
+        df_middle_cities['middle_city'] = True
+        df2 = df0.merge(df_big_cities.drop('city', axis=1), how='left', left_on='city', right_index=True)
+        df3 = df2.merge(df_middle_cities.drop('city', axis=1), how='left', left_on='city', right_index=True)
+        df3[['big_city', 'middle_city']] = df3[['big_city', 'middle_city']].fillna(False)
+        df3['top_city'] = 'rare'
+        df3.loc[df3.big_city | df3.middle_city, 'top_city'] = df3.loc[df3.big_city | df3.middle_city]['city']
+        df3[['big_city', 'middle_city']] = df3[['big_city', 'middle_city']].astype(int)
+
+        big_cities_set = set(pd.unique(df3.city[df3.big_city == 1]))
+        middle_cities_set = set(pd.unique(df3.city[df3.middle_city == 1]))
+        return df3.drop('city', axis=1)
+    else:
+        df1 = df0
+        df1.loc[df1.city.isin(big_cities_set), 'big_city'] = True
+        # df1.city[df1.city.isin(big_cities_set)]
+        df1.loc[df1.city.isin(middle_cities_set), 'middle_city'] = True
+        df1[['big_city', 'middle_city']] = df1[['big_city', 'middle_city']].fillna(False)
+        df1['top_city'] = 'rare'
+        df1.loc[(df1.city.isin(big_cities_set) | df1.city.isin(middle_cities_set)), 'top_city'] = df1.city[(df1.city.isin(big_cities_set) | df1.city.isin(middle_cities_set))]
+
+        return df1.drop('city', axis=1)
+        
+
 
 def prepare_categorical(df: pd.DataFrame) -> pd.DataFrame:
     """
