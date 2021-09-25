@@ -1,12 +1,12 @@
 import argparse
 import logging.config
 import pandas as pd
-from raifhack_ds.features import prepare_categorical
+from raifhack_ds.features import prepare_categorical, preprocess
 from traceback import format_exc
 
 from raifhack_ds.model import BenchmarkModel
 from raifhack_ds.model import LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES, \
-    CATEGORICAL_STE_FEATURES
+    CATEGORICAL_STE_FEATURES, BAD_REGIONS
 
 logging.config.dictConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -41,11 +41,21 @@ if __name__ == "__main__":
         test_df = pd.read_csv(args['d'])
         logger.info(f'Input shape: {test_df.shape}')
         test_df = prepare_categorical(test_df)
+        # test_df = preprocess(test_df)
 
         logger.info('Load model')
-        model = BenchmarkModel.load(args['mp'])
+        model = BenchmarkModel.load('model')
+        models = {}
+        for s in BAD_REGIONS:
+            models[s] = BenchmarkModel.load('model' + s)
+
         logger.info('Predict')
-        test_df['per_square_meter_price'] = model.predict(test_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+        for s in BAD_REGIONS:
+            test_df.loc[test_df.region == s, 'per_square_meter_price'] = models[s].predict(test_df[test_df.region == s][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+
+        test_df.loc[~test_df.region.isin(BAD_REGIONS), 'per_square_meter_price'] = model.predict(test_df[~test_df.region.isin(BAD_REGIONS)][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES])
+
+
         logger.info('Save results')
         test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
     except Exception as e:
