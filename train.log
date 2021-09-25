@@ -303,3 +303,18 @@ ValueError: The target 'y' needs to have more than 1 class. Got 1 class instead
 2021-09-25 12:44:08,177 __main__     INFO     Predict
 2021-09-25 12:44:08,286 __main__     INFO     Save results
 2021-09-25 12:44:08,305 __main__     INFO     END predict.py
+2021-09-25 13:06:19,604 __main__     INFO     START train.py
+2021-09-25 13:06:19,605 __main__     INFO     Load train df
+2021-09-25 13:06:21,438 __main__     INFO     Load validation df
+2021-09-25 13:06:21,660 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 13:06:31,309 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 13:06:31,334 __main__     INFO     Fit model
+2021-09-25 13:06:31,334 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 13:09:45,872 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 13:16:32,049 raifhack_ds.model INFO     Corr coef: -0.13
+2021-09-25 13:16:32,050 __main__     INFO     Save model
+2021-09-25 13:17:12,043 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5725275135439643, 'mdape': 0.32248840654108873, 'rmse': 76440.93663795246, 'r2': 0.8069367997412927, 'raif_metric': 3.5827033522687053}
+2021-09-25 13:17:51,560 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.21463647300510263, 'mdape': 0.19057613391168324, 'rmse': 24228.671910766006, 'r2': 0.9295998963593325, 'raif_metric': 0.9462424094647868}
+2021-09-25 13:17:55,605 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.7379665371484427, 'mdape': 0.34113263859473425, 'rmse': 87230.56446138523, 'r2': 0.7163225562371849, 'raif_metric': 3.7639409513780486}
+2021-09-25 13:17:59,545 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3331177769224468, 'mdape': 0.2048525999263556, 'rmse': 32846.06623736565, 'r2': 0.7766417312995466, 'raif_metric': 1.3051770114419303}
+2021-09-25 13:17:59,545 __main__     INFO     END train.py

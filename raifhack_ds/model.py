@@ -21,7 +21,7 @@ TARGET = 'per_square_meter_price'
 CATEGORICAL_STE_FEATURES = ['region', 'realty_type']
 
 # признаки, для которых применяем one hot encoding
-CATEGORICAL_OHE_FEATURES = ['price_type']
+CATEGORICAL_OHE_FEATURES = []
 
 def cnt_ohe_ft(df):
     res = 0
@@ -63,9 +63,10 @@ NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
        'reform_count_of_houses_1000', 'reform_count_of_houses_500',
        'reform_house_population_1000', 'reform_house_population_500',
        'reform_mean_floor_count_1000', 'reform_mean_floor_count_500',
-       'reform_mean_year_building_1000', 'reform_mean_year_building_500','total_square'
+       'reform_mean_year_building_1000', 'reform_mean_year_building_500','total_square',
+        'price_type'
                 # 'real_floor', 'floor_isna', 'high_floor', 'underground_floor', 'very_high_floor'
-                ]
+]
 
 MODEL_PARAMS = dict(
             n_estimators=2000,
