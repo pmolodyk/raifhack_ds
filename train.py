@@ -61,6 +61,8 @@ if __name__ == "__main__":
         y_offer = train_df[train_df.price_type == PriceTypeEnum.OFFER_PRICE][TARGET]
         X_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
         y_manual = train_df[train_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
+        X_all = train_df[NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
+        y_all = train_df[TARGET]
         logger.info(f'X_offer {X_offer.shape}  y_offer {y_offer.shape}\tX_manual {X_manual.shape} y_manual {y_manual.shape}')
 
         X_val_offer = val_df[val_df.price_type == PriceTypeEnum.OFFER_PRICE][NUM_FEATURES+CATEGORICAL_OHE_FEATURES+CATEGORICAL_STE_FEATURES]
@@ -71,7 +73,7 @@ if __name__ == "__main__":
         model = BenchmarkModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                   ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
         logger.info('Fit model')
-        model.fit(X_offer, y_offer, X_manual, y_manual)
+        model.fit(X_offer, y_offer, X_manual, y_manual, X_all, y_all)
         logger.info('Save model')
         model.save(args['mp'])
 

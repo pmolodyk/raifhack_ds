@@ -44,3 +44,262 @@
 2021-09-24 22:37:16,524 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6698596129156125, 'mdape': 0.32935958086730255, 'rmse': 85631.92215009569, 'r2': 0.7266249821132493, 'raif_metric': 3.654987172813648}
 2021-09-24 22:37:16,608 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3626395055690544, 'mdape': 0.23478071176958018, 'rmse': 43810.10250281943, 'r2': 0.5787374262925938, 'raif_metric': 1.832304230991863}
 2021-09-24 22:37:16,609 __main__     INFO     END train.py
+2021-09-25 10:52:10,121 __main__     INFO     START train.py
+2021-09-25 10:52:10,122 __main__     INFO     Load train df
+2021-09-25 10:52:12,267 __main__     INFO     Load validation df
+2021-09-25 10:52:12,497 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 10:52:14,159 __main__     INFO     X_offer (247712, 74)  y_offer (247712,)	X_manual (4100, 74) y_manual (4100,)
+2021-09-25 10:52:14,174 __main__     INFO     Fit model
+2021-09-25 10:52:14,174 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 10:54:04,599 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 10:54:12,163 raifhack_ds.model INFO     Corr coef: -0.21
+2021-09-25 10:54:12,163 __main__     INFO     Save model
+2021-09-25 10:54:56,808 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5153339547593516, 'mdape': 0.3169092489500228, 'rmse': 73322.88719312495, 'r2': 0.8223657869518662, 'raif_metric': 3.5421095491197248}
+2021-09-25 10:54:57,486 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2820420557749728, 'mdape': 0.2530155283857807, 'rmse': 76449.58761786461, 'r2': 0.2977886997043536, 'raif_metric': 1.9087441297619057}
+2021-09-25 10:55:02,690 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6869478090444214, 'mdape': 0.3373015174479511, 'rmse': 85341.78690262868, 'r2': 0.7284743242513985, 'raif_metric': 3.7328860246503823}
+2021-09-25 10:55:02,781 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3486765128127435, 'mdape': 0.23246760001250075, 'rmse': 46636.05385010823, 'r2': 0.5226379077173814, 'raif_metric': 1.879942218554027}
+2021-09-25 10:55:02,781 __main__     INFO     END train.py
+2021-09-25 10:56:15,454 __main__     INFO     START predict.py
+2021-09-25 10:56:15,455 __main__     INFO     Load test df
+2021-09-25 10:56:15,480 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 10:56:15,491 __main__     INFO     Load model
+2021-09-25 10:56:15,528 __main__     INFO     Predict
+2021-09-25 10:56:15,647 __main__     INFO     Save results
+2021-09-25 10:56:15,650 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/predict.py", line 51, in <module>
+    test_df[['id','per_square_meter_price']].to_csv(args['o'], index=False)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/frame.py", line 2912, in __getitem__
+    indexer = self.loc._get_listlike_indexer(key, axis=1, raise_missing=True)[1]
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/indexing.py", line 1254, in _get_listlike_indexer
+    self._validate_read_indexer(keyarr, indexer, axis, raise_missing=raise_missing)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/indexing.py", line 1304, in _validate_read_indexer
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['id'] not in index"
+
+2021-09-25 10:57:56,614 __main__     INFO     START train.py
+2021-09-25 10:57:56,615 __main__     INFO     Load train df
+2021-09-25 10:57:58,560 __main__     INFO     Load validation df
+2021-09-25 10:57:58,794 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 10:58:00,444 __main__     INFO     X_offer (247712, 74)  y_offer (247712,)	X_manual (4100, 74) y_manual (4100,)
+2021-09-25 10:58:00,478 __main__     INFO     Fit model
+2021-09-25 10:58:00,478 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 10:59:56,326 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 11:00:04,259 raifhack_ds.model INFO     Corr coef: -0.21
+2021-09-25 11:00:04,259 __main__     INFO     Save model
+2021-09-25 11:00:49,874 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5153339547593516, 'mdape': 0.3169092489500228, 'rmse': 73322.88719312495, 'r2': 0.8223657869518662, 'raif_metric': 3.5421095491197248}
+2021-09-25 11:00:50,623 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2820420557749728, 'mdape': 0.2530155283857807, 'rmse': 76449.58761786461, 'r2': 0.2977886997043536, 'raif_metric': 1.9087441297619057}
+2021-09-25 11:00:55,735 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6869478090444214, 'mdape': 0.3373015174479511, 'rmse': 85341.78690262868, 'r2': 0.7284743242513985, 'raif_metric': 3.7328860246503823}
+2021-09-25 11:00:55,809 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3486765128127435, 'mdape': 0.23246760001250075, 'rmse': 46636.05385010823, 'r2': 0.5226379077173814, 'raif_metric': 1.879942218554027}
+2021-09-25 11:00:55,809 __main__     INFO     END train.py
+2021-09-25 11:02:39,322 __main__     INFO     START train.py
+2021-09-25 11:02:39,323 __main__     INFO     Load train df
+2021-09-25 11:02:41,268 __main__     INFO     Load validation df
+2021-09-25 11:02:41,479 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 11:02:44,230 __main__     INFO     X_offer (247712, 74)  y_offer (247712,)	X_manual (4100, 74) y_manual (4100,)
+2021-09-25 11:02:44,247 __main__     INFO     Fit model
+2021-09-25 11:02:44,247 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 11:04:31,326 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 11:04:38,783 raifhack_ds.model INFO     Corr coef: -0.21
+2021-09-25 11:04:38,783 __main__     INFO     Save model
+2021-09-25 11:05:16,507 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5153339547593516, 'mdape': 0.3169092489500228, 'rmse': 73322.88719312495, 'r2': 0.8223657869518662, 'raif_metric': 3.5421095491197248}
+2021-09-25 11:05:17,158 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2820420557749728, 'mdape': 0.2530155283857807, 'rmse': 76449.58761786461, 'r2': 0.2977886997043536, 'raif_metric': 1.9087441297619057}
+2021-09-25 11:05:21,609 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6869478090444214, 'mdape': 0.3373015174479511, 'rmse': 85341.78690262868, 'r2': 0.7284743242513985, 'raif_metric': 3.7328860246503823}
+2021-09-25 11:05:21,676 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.3486765128127435, 'mdape': 0.23246760001250075, 'rmse': 46636.05385010823, 'r2': 0.5226379077173814, 'raif_metric': 1.879942218554027}
+2021-09-25 11:05:21,677 __main__     INFO     END train.py
+2021-09-25 11:49:03,661 __main__     INFO     START train.py
+2021-09-25 11:49:03,661 __main__     INFO     Load train df
+2021-09-25 11:49:05,770 __main__     INFO     Load validation df
+2021-09-25 11:49:05,983 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 11:49:08,442 __main__     INFO     X_offer (247712, 69)  y_offer (247712,)	X_manual (4100, 69) y_manual (4100,)
+2021-09-25 11:49:08,457 __main__     INFO     Fit model
+2021-09-25 11:49:08,458 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 11:50:38,419 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 11:50:45,818 raifhack_ds.model INFO     Corr coef: -0.21
+2021-09-25 11:50:45,818 __main__     INFO     Save model
+2021-09-25 11:51:30,977 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.5241246729489482, 'mdape': 0.3155228263863128, 'rmse': 73394.10663718628, 'r2': 0.8220205426652121, 'raif_metric': 3.5270129865407336}
+2021-09-25 11:51:31,627 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.2812929499466945, 'mdape': 0.2494025203230424, 'rmse': 76929.28196872774, 'r2': 0.2889487935088749, 'raif_metric': 1.8988040529529333}
+2021-09-25 11:51:36,335 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.6898518563796465, 'mdape': 0.33316673673054054, 'rmse': 85613.74812555172, 'r2': 0.7267410088690623, 'raif_metric': 3.706536755955045}
+2021-09-25 11:51:36,401 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33240323678912215, 'mdape': 0.22164990290080758, 'rmse': 43881.28543786587, 'r2': 0.5773673739072531, 'raif_metric': 1.7383810716687855}
+2021-09-25 11:51:36,402 __main__     INFO     END train.py
+2021-09-25 11:58:07,466 __main__     INFO     START train.py
+2021-09-25 11:58:07,467 __main__     INFO     Load train df
+2021-09-25 11:58:09,463 __main__     INFO     Load validation df
+2021-09-25 11:58:09,674 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 11:58:16,911 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/train.py", line 58, in <module>
+    train_df = preprocess(train_df)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/features.py", line 24, in preprocess
+    df1['price_type'] = df_y_resampled['price_type']
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 882, in __getitem__
+    return self._get_value(key)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 990, in _get_value
+    loc = self.index.get_loc(label)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/indexes/range.py", line 358, in get_loc
+    raise KeyError(key)
+KeyError: 'price_type'
+
+2021-09-25 12:00:31,541 __main__     INFO     START train.py
+2021-09-25 12:00:31,542 __main__     INFO     Load train df
+2021-09-25 12:00:33,637 __main__     INFO     Load validation df
+2021-09-25 12:00:33,875 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:00:40,920 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/train.py", line 58, in <module>
+    train_df = preprocess(train_df)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/features.py", line 24, in preprocess
+    df1['price_type'] = df_y_resampled['price_type']
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 882, in __getitem__
+    return self._get_value(key)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 990, in _get_value
+    loc = self.index.get_loc(label)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/indexes/range.py", line 358, in get_loc
+    raise KeyError(key)
+KeyError: 'price_type'
+
+2021-09-25 12:01:12,381 __main__     INFO     START train.py
+2021-09-25 12:01:12,382 __main__     INFO     Load train df
+2021-09-25 12:01:14,531 __main__     INFO     Load validation df
+2021-09-25 12:01:14,745 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:01:21,967 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/train.py", line 58, in <module>
+    train_df = preprocess(train_df)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/features.py", line 25, in preprocess
+    df1['price_type'] = df_y_resampled['price_type']
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 882, in __getitem__
+    return self._get_value(key)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/series.py", line 990, in _get_value
+    loc = self.index.get_loc(label)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/pandas/core/indexes/range.py", line 358, in get_loc
+    raise KeyError(key)
+KeyError: 'price_type'
+
+2021-09-25 12:07:24,244 __main__     INFO     START train.py
+2021-09-25 12:07:24,245 __main__     INFO     Load train df
+2021-09-25 12:07:26,734 __main__     INFO     Load validation df
+2021-09-25 12:07:26,959 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:07:36,261 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 12:07:36,288 __main__     INFO     Fit model
+2021-09-25 12:07:36,288 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 12:09:01,471 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 12:09:02,037 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/train.py", line 74, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/model.py", line 170, in fit
+    self._find_corr_coefficient(X_manual, y_manual)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/model.py", line 142, in _find_corr_coefficient
+    predictions = self.pipeline.predict(X_manual)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/utils/metaestimators.py", line 120, in <lambda>
+    out = lambda *args, **kwargs: self.fn(obj, *args, **kwargs)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/pipeline.py", line 418, in predict
+    Xt = transform.transform(Xt)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 564, in transform
+    Xs = self._fit_transform(X, None, _transform_one, fitted=True)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/compose/_column_transformer.py", line 434, in _fit_transform
+    return Parallel(n_jobs=self.n_jobs)(
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/parallel.py", line 1044, in __call__
+    while self.dispatch_one_batch(iterator):
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/parallel.py", line 859, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/parallel.py", line 777, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/_parallel_backends.py", line 208, in apply_async
+    result = ImmediateResult(func)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/_parallel_backends.py", line 572, in __init__
+    self.results = batch()
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/joblib/parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/utils/fixes.py", line 222, in __call__
+    return self.function(*args, **kwargs)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/pipeline.py", line 733, in _transform_one
+    res = transformer.transform(X)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py", line 471, in transform
+    X_int, X_mask = self._transform(X, handle_unknown=self.handle_unknown,
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py", line 136, in _transform
+    raise ValueError(msg)
+ValueError: Found unknown categories [1] in column 0 during transform
+
+2021-09-25 12:11:01,524 __main__     INFO     START train.py
+2021-09-25 12:11:01,525 __main__     INFO     Load train df
+2021-09-25 12:11:03,654 __main__     INFO     Load validation df
+2021-09-25 12:11:03,909 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:11:14,036 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 12:11:14,063 __main__     INFO     Fit model
+2021-09-25 12:11:14,063 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 12:14:22,148 __main__     INFO     START train.py
+2021-09-25 12:14:22,149 __main__     INFO     Load train df
+2021-09-25 12:14:24,000 __main__     INFO     Load validation df
+2021-09-25 12:14:24,209 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:14:33,237 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 12:14:33,269 __main__     INFO     Fit model
+2021-09-25 12:14:33,269 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 12:14:40,824 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/train.py", line 76, in <module>
+    model.fit(X_offer, y_offer, X_manual, y_manual, X_all, y_all)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/model.py", line 168, in fit
+    self.pipeline.fit(X_all, y_all, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES), len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/sklearn/pipeline.py", line 346, in fit
+    self._final_estimator.fit(Xt, y, **fit_params_last_step)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/sklearn.py", line 818, in fit
+    super().fit(X, y, sample_weight=sample_weight, init_score=init_score,
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/sklearn.py", line 683, in fit
+    self._Booster = train(params, train_set,
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/engine.py", line 228, in train
+    booster = Booster(params=params, train_set=train_set)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/basic.py", line 2229, in __init__
+    train_set.construct()
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/basic.py", line 1468, in construct
+    self._lazy_init(self.data, label=self.label,
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/basic.py", line 1298, in _lazy_init
+    return self.set_feature_name(feature_name)
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/lightgbm/basic.py", line 1777, in set_feature_name
+    raise ValueError("Length of feature_name({}) and num_feature({}) don't match"
+ValueError: Length of feature_name(70) and num_feature(71) don't match
+
+2021-09-25 12:16:10,239 __main__     INFO     START train.py
+2021-09-25 12:16:10,240 __main__     INFO     Load train df
+2021-09-25 12:16:12,084 __main__     INFO     Load validation df
+2021-09-25 12:16:12,291 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:21:39,796 __main__     INFO     START train.py
+2021-09-25 12:21:39,797 __main__     INFO     Load train df
+2021-09-25 12:21:41,664 __main__     INFO     Load validation df
+2021-09-25 12:21:41,880 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:21:50,922 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 12:21:50,960 __main__     INFO     Fit model
+2021-09-25 12:21:50,960 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 12:24:57,076 raifhack_ds.model INFO     Find corr coefficient
+2021-09-25 12:31:32,443 __main__     INFO     START train.py
+2021-09-25 12:31:32,444 __main__     INFO     Load train df
+2021-09-25 12:31:35,028 __main__     INFO     Load validation df
+2021-09-25 12:31:35,261 __main__     INFO     Input shape: (251812, 77)
+2021-09-25 12:31:45,855 raifhack_ds.model INFO     Corr coef: -0.13
+2021-09-25 12:31:45,855 __main__     INFO     Save model
+2021-09-25 12:31:48,172 __main__     INFO     X_offer (247712, 70)  y_offer (247712,)	X_manual (247712, 70) y_manual (247712,)
+2021-09-25 12:31:48,217 __main__     INFO     Fit model
+2021-09-25 12:31:48,218 raifhack_ds.model INFO     Fit lightgbm
+2021-09-25 12:32:35,925 __main__     INFO     Metrics stat for training data with offers prices: {'mape': 1.6174106391197363, 'mdape': 0.3260551446214883, 'rmse': 78795.60122877323, 'r2': 0.7948594817147729, 'raif_metric': 3.6263967174283116}
+2021-09-25 12:33:15,190 __main__     INFO     Metrics stat for training data with manual prices: {'mape': 0.214145181147433, 'mdape': 0.18962806994865314, 'rmse': 24077.259215447015, 'r2': 0.9304770523397026, 'raif_metric': 0.9405982889335228}
+2021-09-25 12:33:20,283 __main__     INFO     Metrics stat for validation data with offers prices: {'mape': 1.7717230544994822, 'mdape': 0.34686433148150475, 'rmse': 89254.56901264621, 'r2': 0.7030055362442866, 'raif_metric': 3.81927181885578}
+2021-09-25 12:33:25,245 __main__     INFO     Metrics stat for validation data with manual prices: {'mape': 0.33657360314167967, 'mdape': 0.2012953798776977, 'rmse': 34558.0224438751, 'r2': 0.7527518386586395, 'raif_metric': 1.3236066924387402}
+2021-09-25 12:33:25,245 __main__     INFO     END train.py
+2021-09-25 12:41:56,475 __main__     INFO     START predict.py
+2021-09-25 12:41:56,476 __main__     INFO     Load test df
+2021-09-25 12:41:56,504 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 12:41:56,517 __main__     ERROR    Traceback (most recent call last):
+  File "/home/pmolodyk/Documents/raifhack/baseline/predict.py", line 44, in <module>
+    test_df = preprocess(test_df)
+  File "/home/pmolodyk/Documents/raifhack/baseline/raifhack_ds/features.py", line 22, in preprocess
+    df_X_resampled, df_y_resampled = ros.fit_resample(df1.drop(columns='price_type'), df1['price_type'])
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/imblearn/base.py", line 79, in fit_resample
+    self.sampling_strategy_ = check_sampling_strategy(
+  File "/home/pmolodyk/.local/lib/python3.9/site-packages/imblearn/utils/_validation.py", line 501, in check_sampling_strategy
+    raise ValueError(
+ValueError: The target 'y' needs to have more than 1 class. Got 1 class instead
+
+2021-09-25 12:44:08,104 __main__     INFO     START predict.py
+2021-09-25 12:44:08,105 __main__     INFO     Load test df
+2021-09-25 12:44:08,132 __main__     INFO     Input shape: (2974, 76)
+2021-09-25 12:44:08,135 __main__     INFO     Load model
+2021-09-25 12:44:08,177 __main__     INFO     Predict
+2021-09-25 12:44:08,286 __main__     INFO     Save results
+2021-09-25 12:44:08,305 __main__     INFO     END predict.py

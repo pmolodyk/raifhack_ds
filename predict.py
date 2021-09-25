@@ -1,7 +1,7 @@
 import argparse
 import logging.config
 import pandas as pd
-from raifhack_ds.features import prepare_categorical
+from raifhack_ds.features import prepare_categorical, preprocess
 from traceback import format_exc
 
 from raifhack_ds.model import BenchmarkModel
@@ -41,6 +41,7 @@ if __name__ == "__main__":
         test_df = pd.read_csv(args['d'])
         logger.info(f'Input shape: {test_df.shape}')
         test_df = prepare_categorical(test_df)
+        # test_df = preprocess(test_df)
 
         logger.info('Load model')
         model = BenchmarkModel.load(args['mp'])

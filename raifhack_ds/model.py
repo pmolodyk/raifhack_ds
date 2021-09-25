@@ -21,7 +21,13 @@ TARGET = 'per_square_meter_price'
 CATEGORICAL_STE_FEATURES = ['region', 'realty_type']
 
 # признаки, для которых применяем one hot encoding
-CATEGORICAL_OHE_FEATURES = []
+CATEGORICAL_OHE_FEATURES = ['price_type']
+
+def cnt_ohe_ft(df):
+    res = 0
+    for ft in CATEGORICAL_OHE_FEATURES:
+        res += 2**len(df[ft].value_counts())
+    return res
 
 # численные признаки
 NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
@@ -57,7 +63,9 @@ NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
        'reform_count_of_houses_1000', 'reform_count_of_houses_500',
        'reform_house_population_1000', 'reform_house_population_500',
        'reform_mean_floor_count_1000', 'reform_mean_floor_count_500',
-       'reform_mean_year_building_1000', 'reform_mean_year_building_500','total_square']
+       'reform_mean_year_building_1000', 'reform_mean_year_building_500','total_square'
+                # 'real_floor', 'floor_isna', 'high_floor', 'underground_floor', 'very_high_floor'
+                ]
 
 MODEL_PARAMS = dict(
             n_estimators=2000,
@@ -142,8 +150,8 @@ class BenchmarkModel():
         best_metrics = 10
         ans = -1
         for deviation in np.linspace(-0.9, 0.9, num=200):
+            print('trying deviation:', deviation)
             y_preds = pd.Series(np.array(predictions) * (1 + deviation))
-            print(y_preds)
             new_metrics = metrics_stat(y_manual.values, y_preds)['raif_metric']
             if new_metrics < best_metrics:
                 best_metrics = new_metrics
@@ -151,7 +159,7 @@ class BenchmarkModel():
         self.corr_coef = ans
 
     def fit(self, X_offer: pd.DataFrame, y_offer: pd.Series,
-            X_manual: pd.DataFrame, y_manual: pd.Series):
+            X_manual: pd.DataFrame, y_manual: pd.Series, X_all, y_all):
         """Обучение модели.
         ML модель обучается на данных по предложениям на рынке (цены из объявления)
         Затем вычисляется среднее отклонение между руяными оценками и предиктами для корректировки стоимости
@@ -163,7 +171,8 @@ class BenchmarkModel():
         """
         logger.info('Fit lightgbm')
         print(X_offer.columns)
-        self.pipeline.fit(X_offer, y_offer, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES), len(NUM_FEATURES) + len(CATEGORICAL_OHE_FEATURES) + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
+        ohe_features = cnt_ohe_ft(X_offer)
+        self.pipeline.fit(X_all, y_all, model__feature_name=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))],model__categorical_feature=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features, len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))], model__eval_metric='mape')
         logger.info('Find corr coefficient')
         self._find_corr_coefficient(X_manual, y_manual)
         logger.info(f'Corr coef: {self.corr_coef:.2f}')
