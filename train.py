@@ -3,7 +3,7 @@ import logging.config
 import pandas as pd
 from traceback import format_exc
 
-from raifhack_ds.model import BenchmarkModel
+from raifhack_ds.model import BenchmarkModel, CatBoostModel
 from raifhack_ds.model import MODEL_PARAMS, LOGGING_CONFIG, NUM_FEATURES, CATEGORICAL_OHE_FEATURES,CATEGORICAL_STE_FEATURES,TARGET, BAD_REGIONS, GOOD_REGIONS, EXP_NAME
 from raifhack_ds.utils import PriceTypeEnum
 from raifhack_ds.metrics import metrics_stat
@@ -29,7 +29,7 @@ def parse_args():
         description="""
     Бенчмарк для хакатона по предсказанию стоимости коммерческой недвижимости от "Райффайзенбанк"
     Скрипт для обучения модели
-     
+
      Примеры:
         1) с poetry - poetry run python3 train.py --train_data /path/to/train/data --model_path /path/to/model
         2) без poetry - python3 train.py --train_data /path/to/train/data --model_path /path/to/model
@@ -71,14 +71,14 @@ if __name__ == "__main__":
         y_val_manual = val_df[val_df.price_type == PriceTypeEnum.MANUAL_PRICE][TARGET]
         models = {}
         for s in BAD_REGIONS + GOOD_REGIONS:
-            models[s] = BenchmarkModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
+            models[s] = CatBoostModel(numerical_features=NUM_FEATURES, ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                   ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
             logger.info('Fit {} model'.format(s))
             models[s].fit(X_manual[X_manual.region == s], y_manual[X_manual.region == s], X_all[X_all.region == s], y_all[X_all.region == s])
             logger.info('Save model')
             models[s].save('model' + s)
 
-        model = BenchmarkModel(numerical_features=NUM_FEATURES,
+        model = CatBoostModel(numerical_features=NUM_FEATURES,
                                       ohe_categorical_features=CATEGORICAL_OHE_FEATURES,
                                       ste_categorical_features=CATEGORICAL_STE_FEATURES, model_params=MODEL_PARAMS)
         logger.info('Fit model')

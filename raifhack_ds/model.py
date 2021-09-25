@@ -5,12 +5,14 @@ import numpy as np
 import logging
 
 from lightgbm import LGBMRegressor
+from catboost import CatBoostRegressor
 
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, OrdinalEncoder
 from sklearn.exceptions import NotFittedError
 from raifhack_ds.metrics import metrics_stat
+
 
 from raifhack_ds.data_transformers import SmoothedTargetEncoding
 
@@ -73,15 +75,20 @@ NUM_FEATURES = ['lat', 'lng', 'osm_amenity_points_in_0.001',
                 # 'real_floor', 'floor_isna', 'high_floor', 'underground_floor', 'very_high_floor'
 ]
 
+# MODEL_PARAMS = dict(
+#             n_estimators=2000,
+#             learning_rate=0.01,
+#             reg_alpha=1,
+#             num_leaves=40,
+#             min_child_samples=5,
+#             importance_type="gain",
+#             n_jobs=1,
+#             random_state=563
+#         )
+
+
 MODEL_PARAMS = dict(
-            n_estimators=2000,
-            learning_rate=0.01,
-            reg_alpha=1,
-            num_leaves=40,
-            min_child_samples=5,
-            importance_type="gain",
-            n_jobs=1,
-            random_state=563
+            loss_function='MAE'
         )
 
 LOGGING_CONFIG = {
@@ -191,6 +198,124 @@ class BenchmarkModel():
         """
         if self.__is_fitted:
             predictions = self.pipeline.predict(X)
+            corrected_price = predictions * (1 + self.corr_coef)
+            return corrected_price
+        else:
+            raise NotFittedError(
+                "This {} instance is not fitted yet! Call 'fit' with appropriate arguments before predict".format(
+                    type(self).__name__
+                )
+            )
+
+    def save(self, path: str):
+        """Сериализует модель в pickle.
+
+        :param path: str, путь до файла
+        """
+        with open(path, "wb") as f:
+            pickle.dump(self, f)
+
+    @classmethod
+    def load(self, path: str):
+        """Сериализует модель в pickle.
+
+        :param path: str, путь до файла
+        :return: Модель
+        """
+        with open(path, "rb") as f:
+            model = pickle.load(f)
+        return model
+
+
+class CatBoostModel():
+    def __init__(self, numerical_features: typing.List[str],
+                 ohe_categorical_features: typing.List[str],
+                 ste_categorical_features: typing.List[typing.Union[str, typing.List[str]]],
+                 model_params: typing.Dict[str, typing.Union[str,int,float]]):
+        self.num_features = numerical_features
+        self.ohe_cat_features = ohe_categorical_features
+        self.ste_cat_features = ste_categorical_features
+
+        self.preprocessor = ColumnTransformer(transformers=[
+            ('num', StandardScaler(), self.num_features),
+            ('ohe', OneHotEncoder(), self.ohe_cat_features),
+            ('ste', OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1),
+             self.ste_cat_features)])
+
+        self.model = CatBoostRegressor(**model_params)
+
+        self.pipeline = Pipeline(steps=[
+            ('preprocessor', self.preprocessor),
+            ('model', self.model)])
+
+        self._is_fitted = False
+        self.corr_coef = 0
+
+    def _find_corr_coefficient(self, X_manual: pd.DataFrame, y_manual: pd.Series):
+        """Вычисление корректирующего коэффициента
+
+        :param X_manual: pd.DataFrame с ручными оценками
+        :param y_manual: pd.Series - цены ручника
+        """
+        ohe_features = cnt_ohe_ft(X_manual)
+        X_all_tr = self.preprocessor.transform(X_manual)
+        X_all_df = pd.DataFrame(data=X_all_tr, columns=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))])
+        cat_features = [f'{i}' for i in range(len(NUM_FEATURES) + ohe_features, len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))]
+        for col in cat_features:
+            X_all_df[col] = X_all_df[col].astype('int')
+        predictions = self.model.predict(X_all_df)
+        print(predictions)
+        best_metrics = 10
+        ans = -1
+        for deviation in np.linspace(-0.2, 0.2, num=40 ):
+            print('trying deviation:', deviation)
+            y_preds = pd.Series(np.array(predictions) * (1 + deviation))
+            new_metrics = metrics_stat(y_manual.values, y_preds)['raif_metric']
+            if new_metrics < best_metrics:
+                best_metrics = new_metrics
+                ans = deviation
+        self.corr_coef = ans
+
+    def fit(self, X_manual: pd.DataFrame, y_manual: pd.Series, X_all, y_all):
+        """Обучение модели.
+        ML модель обучается на данных по предложениям на рынке (цены из объявления)
+        Затем вычисляется среднее отклонение между руяными оценками и предиктами для корректировки стоимости
+
+        :param X_offer: pd.DataFrame с объявлениями
+        :param y_offer: pd.Series - цена предложения (в объявлениях)
+        :param X_manual: pd.DataFrame с ручными оценками
+        :param y_manual: pd.Series - цены ручника
+        """
+        # np.save('dump.npy', self.preprocessor.fit_transform(X_all))
+        logger.info('Fit lightgbm')
+        ohe_features = cnt_ohe_ft(X_all)
+        X_all_tr = self.preprocessor.fit_transform(X_all)
+        X_all_df = pd.DataFrame(data=X_all_tr, columns=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))])
+        cat_features = [f'{i}' for i in range(len(NUM_FEATURES) + ohe_features, len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))]
+        for col in cat_features:
+            X_all_df[col] = X_all_df[col].astype('int')
+        self.model.fit(X_all_df, y_all, cat_features=cat_features)
+
+        logger.info('Find corr coefficient')
+        self._find_corr_coefficient(X_manual, y_manual)
+        logger.info(f'Corr coef: {self.corr_coef:.2f}')
+        self.__is_fitted = True
+
+    def predict(self, X: pd.DataFrame) -> np.array:
+        """Предсказание модели Предсказываем преобразованный таргет, затем конвертируем в обычную цену через обратное
+        преобразование.
+
+        :param X: pd.DataFrame
+        :return: np.array, предсказания (цены на коммерческую недвижимость)
+        """
+        if self.__is_fitted:
+            ohe_features = cnt_ohe_ft(X)
+            X_all_tr = self.preprocessor.transform(X)
+            X_all_df = pd.DataFrame(data=X_all_tr, columns=[f'{i}' for i in range(len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))])
+            cat_features = [f'{i}' for i in range(len(NUM_FEATURES) + ohe_features, len(NUM_FEATURES) + ohe_features + len(CATEGORICAL_STE_FEATURES))]
+            for col in cat_features:
+                X_all_df[col] = X_all_df[col].astype('int')
+            predictions = self.model.predict(X_all_df)
             corrected_price = predictions * (1 + self.corr_coef)
             return corrected_price
         else:
