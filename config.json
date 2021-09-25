@@ -1,4 +1,6 @@
 {
+  "exp_name" : "lightgbm_base",
+  "separate_training" : true,
   "target_column": "per_square_meter_price",
   "num_features" : ["lat", "lng", "osm_amenity_points_in_0.001",
        "osm_amenity_points_in_0.005", "osm_amenity_points_in_0.0075",
@@ -38,7 +40,7 @@
   "categorical_ordinal" : ["city","region", "realty_type"],
   "categorical_tomodel" : [],
   "model": {
-    "model_name" : "LightGBM",
+    "model_name" : "LightGBMModel",
     "params": {
       "n_estimators": 2000,
       "learning_rate": 0.01,
